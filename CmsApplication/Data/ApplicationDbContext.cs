@@ -12,5 +12,7 @@ namespace CmsApplication.Data
             : base(options)
         {
         }
+
+        public DbSet<CmsApplication.Areas.Panel.Models.Config> Config { get; set; }
     }
 }
