@@ -1,0 +1,24 @@
+﻿<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a class="brand-link text-center" asp-page="/Index">
+        <span class="brand-text font-weight-light">@Configuration["AppSettings:Name"]</span>
+    </a>
+
+    <div class="sidebar">
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Index">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>Anasayfa</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Panel" asp-controller="Configs" asp-action="Index">
+                        <i class="nav-icon fas fa-cog"></i>
+                        <p>Site Ayarları</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
