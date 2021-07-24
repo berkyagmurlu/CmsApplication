@@ -52,6 +52,8 @@ namespace CmsApplication
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddRazorPages();
+
+            services.AddScoped<CmsApplication.Components.Helpers>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
