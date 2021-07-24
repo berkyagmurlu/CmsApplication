@@ -444,6 +444,9 @@ $RECYCLE.BIN/
 .idea/
 *.sln.iml
 
+# SqlLite DB
+*.db
+
 ##
 ## Visual Studio Code
 ##
