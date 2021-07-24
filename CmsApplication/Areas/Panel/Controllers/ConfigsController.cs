@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CmsApplication.Areas.Panel.Models;
 using CmsApplication.Data;
+using SmartBreadcrumbs.Attributes;
 
 namespace CmsApplication.Areas.Panel.Controllers
 {

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SmartBreadcrumbs.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,15 @@ namespace CmsApplication
             services.AddRazorPages();
 
             services.AddScoped<CmsApplication.Components.Helpers>();
+
+            services.AddBreadcrumbs(GetType().Assembly, options =>
+            {
+                options.TagName = "div";
+                options.TagClasses = "col-sm-6";
+                options.OlClasses = "breadcrumb float-sm-right";
+                options.LiClasses = "breadcrumb-item";
+                options.ActiveLiClasses = "breadcrumb-item active";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
