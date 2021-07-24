@@ -56,14 +56,14 @@ namespace CmsApplication
 
             services.AddScoped<CmsApplication.Components.Helpers>();
 
-            services.AddBreadcrumbs(GetType().Assembly, options =>
+            /*services.AddBreadcrumbs(GetType().Assembly, options =>
             {
-                options.TagName = "div";
-                options.TagClasses = "col-sm-6";
+                options.TagName = "";
+                options.TagClasses = "";
                 options.OlClasses = "breadcrumb float-sm-right";
                 options.LiClasses = "breadcrumb-item";
                 options.ActiveLiClasses = "breadcrumb-item active";
-            });
+            });*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
