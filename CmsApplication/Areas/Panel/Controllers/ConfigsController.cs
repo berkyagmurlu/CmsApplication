@@ -27,24 +27,6 @@ namespace CmsApplication.Areas.Panel.Controllers
             return View(await _context.Config.ToListAsync());
         }
 
-        // GET: Panel/Configs/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var config = await _context.Config
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (config == null)
-            {
-                return NotFound();
-            }
-
-            return View(config);
-        }
-
         // GET: Panel/Configs/Create
         public IActionResult Create()
         {
@@ -89,7 +71,7 @@ namespace CmsApplication.Areas.Panel.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Title,Value,CreateAt")] Config config)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Title,Value")] Config config)
         {
             if (id != config.Id)
             {
