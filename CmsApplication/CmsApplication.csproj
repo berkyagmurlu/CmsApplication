@@ -22,10 +22,10 @@
 
   <ItemGroup>
     <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
-    <None Remove="Components\" />
     <None Remove="SmartBreadcrumbs" />
+    <None Remove="Data\Components\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Components\" />
+    <Folder Include="Data\Components\" />
   </ItemGroup>
 </Project>

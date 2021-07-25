@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using CmsApplication.Areas.Panel.Models;
 
 namespace CmsApplication.Data
 {
@@ -13,6 +14,6 @@ namespace CmsApplication.Data
         {
         }
 
-        public DbSet<CmsApplication.Areas.Panel.Models.Config> Config { get; set; }
+        public DbSet<Config> Config { get; set; }
     }
 }
