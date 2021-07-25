@@ -54,8 +54,6 @@ namespace CmsApplication
 
             services.AddRazorPages();
 
-            services.AddScoped<CmsApplication.Components.Helpers>();
-
             /*services.AddBreadcrumbs(GetType().Assembly, options =>
             {
                 options.TagName = "";
