@@ -19,9 +19,6 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Id)
-                            </th>
-                            <th>
                                 @Html.DisplayNameFor(model => model.Name)
                             </th>
                             <th>
@@ -43,9 +40,6 @@
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Id)
-                                    </td>
-                                    <td>
                                         @Html.DisplayFor(modelItem => item.Name)
                                     </td>
                                     <td>
@@ -57,9 +51,16 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.CreateAt)
                                     </td>
-                                    <td>
-                                        <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                                    <td class="d-flex float-sm-right">
+                                        <a class="btn btn-sm btn-success mr-2" title="Güncelle" asp-action="Edit" asp-route-id="@item.Id">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        
+                                        <form asp-action="Delete" asp-route-id="@item.Id">
+                                            <button type="submit" class="btn btn-sm btn-danger" title="Sil">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             }
@@ -67,7 +68,7 @@
                         else
                         {
                             <tr>
-                                <td colspan="6">Kayıt Bulunamadı.</td>
+                                <td colspan="5">Kayıt Bulunamadı.</td>
                             </tr>
                         }
                     </tbody>

@@ -52,6 +52,7 @@ namespace CmsApplication.Areas.Panel.Controllers
                 _f.Flash(Types.Success, "İşlem Başarıyla Gerçekleştirildi");
                 return RedirectToAction(nameof(Index));
             }
+
             return View(config);
         }
 
@@ -83,6 +84,8 @@ namespace CmsApplication.Areas.Panel.Controllers
                 return NotFound();
             }
 
+            ModelState.Remove("CreateAt");
+
             if (ModelState.IsValid)
             {
                 try
@@ -101,37 +104,23 @@ namespace CmsApplication.Areas.Panel.Controllers
                         throw;
                     }
                 }
+
+                _f.Flash(Types.Success, "İşlem Başarıyla Gerçekleştirildi");
                 return RedirectToAction(nameof(Index));
             }
             return View(config);
         }
 
-        // GET: Panel/Configs/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var config = await _context.Config
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (config == null)
-            {
-                return NotFound();
-            }
-
-            return View(config);
-        }
-
         // POST: Panel/Configs/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var config = await _context.Config.FindAsync(id);
             _context.Config.Remove(config);
             await _context.SaveChangesAsync();
+
+            _f.Flash(Types.Success, "İşlem Başarıyla Gerçekleştirildi");
             return RedirectToAction(nameof(Index));
         }
 
