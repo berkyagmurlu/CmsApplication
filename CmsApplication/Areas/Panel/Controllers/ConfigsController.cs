@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CmsApplication.Areas.Panel.Models;
 using CmsApplication.Data;
 using SmartBreadcrumbs.Attributes;
+using Core.Flash;
 
 namespace CmsApplication.Areas.Panel.Controllers
 {
@@ -15,10 +16,12 @@ namespace CmsApplication.Areas.Panel.Controllers
     public class ConfigsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IFlasher _f;
 
-        public ConfigsController(ApplicationDbContext context)
+        public ConfigsController(ApplicationDbContext context, IFlasher flahser)
         {
             _context = context;
+            _f = flahser;
         }
 
         // GET: Panel/Configs
@@ -45,6 +48,8 @@ namespace CmsApplication.Areas.Panel.Controllers
                 config.CreateAt = DateTime.Now;
                 _context.Add(config);
                 await _context.SaveChangesAsync();
+
+                _f.Flash(Types.Success, "İşlem Başarıyla Gerçekleştirildi");
                 return RedirectToAction(nameof(Index));
             }
             return View(config);

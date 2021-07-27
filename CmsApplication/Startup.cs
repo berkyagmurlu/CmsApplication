@@ -54,6 +54,8 @@ namespace CmsApplication
 
             services.AddRazorPages();
 
+            services.AddFlashes().AddMvc();
+
             /*services.AddBreadcrumbs(GetType().Assembly, options =>
             {
                 options.TagName = "";
