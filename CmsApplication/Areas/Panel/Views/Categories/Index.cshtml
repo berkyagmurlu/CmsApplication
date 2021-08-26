@@ -1,0 +1,73 @@
+﻿@model IEnumerable<CmsApplication.Areas.Panel.Models.Category>
+
+@{
+    ViewData["Title"] = "Kategoriler";
+}
+
+@section Buttons {
+    <a class="btn btn-sm btn-success" asp-action="Create">
+        <i class="fa fa-plus"></i>
+        Yeni Oluştur
+    </a>
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CreateAt)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() > 0)
+                        {
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CreateAt)
+                                    </td>
+                                    <td class="d-flex float-sm-right">
+                                        <a class="btn btn-sm btn-success mr-2" title="Güncelle" asp-action="Edit" asp-route-id="@item.Id">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+
+                                        <form asp-action="Delete" asp-route-id="@item.Id">
+                                            <button type="submit" class="btn btn-sm btn-danger" title="Sil" onclick="confirm('Bu kategoriyi silmek istediğinize emin misiniz?')">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4">Kayıt Bulunamadı.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

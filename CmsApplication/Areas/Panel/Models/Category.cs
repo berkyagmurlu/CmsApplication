@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CmsApplication.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,13 +22,5 @@ namespace CmsApplication.Areas.Panel.Models
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy HH:mm}", ApplyFormatInEditMode = true)]
         [Display(Name = "Eklenme Tarihi"), DataType(DataType.Date)]
         public DateTime CreateAt { get; set; }
-    }
-
-    public enum StatusEnum
-    {
-        [Display(Name = "Aktif")]
-        Active = 1,
-        [Display(Name = "Pasif")]
-        Passive = 0,
     }
 }
