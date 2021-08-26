@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CmsApplication.Areas.Panel.Models;
 using CmsApplication.Data;
+using Core.Flash;
 
 namespace CmsApplication.Areas.Panel.Controllers
 {
@@ -14,10 +15,12 @@ namespace CmsApplication.Areas.Panel.Controllers
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IFlasher _f;
 
-        public CategoriesController(ApplicationDbContext context)
+        public CategoriesController(ApplicationDbContext context, IFlasher flahser)
         {
             _context = context;
+            _f = flahser;
         }
 
         // GET: Panel/Categories
@@ -44,6 +47,7 @@ namespace CmsApplication.Areas.Panel.Controllers
             {
                 _context.Add(category);
                 await _context.SaveChangesAsync();
+                _f.Flash(Types.Success, "İşlem Başarıyla Gerçekleştirildi");
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -95,6 +99,7 @@ namespace CmsApplication.Areas.Panel.Controllers
                         throw;
                     }
                 }
+                _f.Flash(Types.Success, "İşlem Başarıyla Gerçekleştirildi");
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -126,6 +131,7 @@ namespace CmsApplication.Areas.Panel.Controllers
             var category = await _context.Categories.FindAsync(id);
             _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
+            _f.Flash(Types.Success, "İşlem Başarıyla Gerçekleştirildi");
             return RedirectToAction(nameof(Index));
         }
 
