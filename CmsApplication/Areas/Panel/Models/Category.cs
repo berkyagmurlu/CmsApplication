@@ -15,7 +15,7 @@ namespace CmsApplication.Areas.Panel.Models
         [Display(Name = "Ad")]
         public string Name { get; set; }
 
-        [MaxLength(11), Required]
+        [Required]
         [Display(Name = "Durum")]
         public StatusEnum Status { get; set; }
 

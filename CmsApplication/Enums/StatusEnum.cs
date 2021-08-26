@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace CmsApplication.Enums
 {
-    public enum StatusEnum
+    public enum StatusEnum: int
     {
+        [Display(Name = "Pasif")]
+        Passive = 0,
+
         [Display(Name = "Aktif")]
         Active = 1,
-
-        [Display(Name = "Pasif")]
-        Passive = 0
     }
 }
