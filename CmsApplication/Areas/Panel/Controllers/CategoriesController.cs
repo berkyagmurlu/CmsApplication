@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CmsApplication.Areas.Panel.Models;
 using CmsApplication.Data;
 using Core.Flash;
+using CmsApplication.Areas.Panel.ViewModels;
 
 namespace CmsApplication.Areas.Panel.Controllers
 {
@@ -32,7 +33,12 @@ namespace CmsApplication.Areas.Panel.Controllers
         // GET: Panel/Categories/Create
         public IActionResult Create()
         {
-            return View();
+            Category category = new Category();
+            category.Status = Enums.StatusEnum.Active;
+
+            CategoryDetailsViewModel categoryDetailsViewModel = new CategoryDetailsViewModel();
+            categoryDetailsViewModel.Category = category;
+            return View(categoryDetailsViewModel);
         }
 
         // POST: Panel/Categories/Create

@@ -1,5 +1,5 @@
 ﻿@using CmsApplication.Enums
-@model CmsApplication.Areas.Panel.Models.Category
+@model CmsApplication.Areas.Panel.ViewModels.CategoryDetailsViewModel
 
 @{
     ViewData["Title"] = "Yeni Oluştur";
@@ -12,16 +12,16 @@
                 <div class="card-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <label asp-for="Category.Name" class="control-label"></label>
+                        <input asp-for="Category.Name" class="form-control" />
+                        <span asp-validation-for="Category.Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Status" class="control-label"></label>
-                        <select asp-for="Status" asp-items="Html.GetEnumSelectList<StatusEnum>()" class="form-control">
+                        <label asp-for="Category.Status" class="control-label"></label>
+                        <select asp-for="Category.Status" asp-items="Html.GetEnumSelectList<StatusEnum>()" class="form-control">
                             <option>Seçiniz</option>
                         </select>
-                        <span asp-validation-for="Status" class="text-danger"></span>
+                        <span asp-validation-for="Category.Status" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Kaydet" class="btn btn-primary" />
