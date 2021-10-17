@@ -4,6 +4,7 @@ using Core.Flash;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -66,7 +67,7 @@ namespace CmsApplication.Areas.Panel.Controllers
                 }
 
                 // New File Stream Save File As Path.Combine
-                var stream = new FileStream(Path.Combine(path, fileName), FileMode.Create);
+                var stream = new FileStream(Path.Combine(path, fileName), FileMode.Create, FileAccess.ReadWrite);
                 sliderFile.CopyToAsync(stream);
 
                 slider.FileName = fileName;
@@ -83,6 +84,36 @@ namespace CmsApplication.Areas.Panel.Controllers
             }
 
             return View(slider);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Display(int id)
+        {
+            var slider = await _context.Slider.FindAsync(id);
+            if (slider == null)
+            {
+                return NotFound();
+            }
+
+            var path = Path.Combine(this._webHostEnvironment.WebRootPath, "uploads", slider.FileName);
+            if (!System.IO.File.Exists(path))
+            {
+                return NotFound("Dosya Bulunamadı");
+            }
+
+            var fileStream = new FileStream(path, FileMode.Open, FileAccess.ReadWrite);
+            return File(fileStream, this.GetMimeType(slider.FileName));
+        }
+
+        private string GetMimeType(string fileName)
+        {
+            var provider = new FileExtensionContentTypeProvider();
+            string contentType;
+            if (!provider.TryGetContentType(fileName, out contentType))
+            {
+                contentType = "application/octet-stream";
+            }
+            return contentType;
         }
     }
 }
