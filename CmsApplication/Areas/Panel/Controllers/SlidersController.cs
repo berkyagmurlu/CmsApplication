@@ -82,6 +82,7 @@ namespace CmsApplication.Areas.Panel.Controllers
                 sliderFile.CopyToAsync(stream);
 
                 slider.FileName = fileName;
+                slider.Title = sliderFile.FileName;
                 slider.CreateAt = DateTime.Now;
                 _context.Add(slider);
                 await _context.SaveChangesAsync();
@@ -113,7 +114,7 @@ namespace CmsApplication.Areas.Panel.Controllers
             }
 
             var fileStream = new FileStream(path, FileMode.Open, FileAccess.ReadWrite);
-            return File(fileStream, this.GetMimeType(slider.FileName));
+            return File(fileStream, this.GetMimeType(slider.FileName), slider.Title);
         }
 
         [HttpPost]

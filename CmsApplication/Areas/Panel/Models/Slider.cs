@@ -22,5 +22,8 @@ namespace CmsApplication.Areas.Panel.Models
 
         [DataType(DataType.Date)]
         public DateTime CreateAt { get; set; }
+
+        [StringLength(512)]
+        public string Title { get; set; }
     }
 }
