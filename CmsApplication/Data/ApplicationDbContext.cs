@@ -15,8 +15,7 @@ namespace CmsApplication.Data
         }
 
         public DbSet<Config> Config { get; set; }
-
         public DbSet<Category> Categories { get; set; }
-
+        public DbSet<Slider> Slider { get; set; }
     }
 }

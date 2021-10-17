@@ -11,10 +11,10 @@ namespace CmsApplication.Data.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 128, nullable: false),
-                    Status = table.Column<int>(maxLength: 11, nullable: false),
+                    Status = table.Column<int>(nullable: false),
                     CreateAt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

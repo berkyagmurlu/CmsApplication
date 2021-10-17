@@ -19,7 +19,6 @@
                     <div class="form-group">
                         <label asp-for="Category.Status" class="control-label"></label>
                         <select asp-for="Category.Status" asp-items="Html.GetEnumSelectList<StatusEnum>()" class="form-control">
-                            <option>Seçiniz</option>
                         </select>
                         <span asp-validation-for="Category.Status" class="text-danger"></span>
                     </div>
