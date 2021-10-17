@@ -30,6 +30,17 @@ namespace CmsApplication.Areas.Panel.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
+        private string GetMimeType(string fileName)
+        {
+            var provider = new FileExtensionContentTypeProvider();
+            string contentType;
+            if (!provider.TryGetContentType(fileName, out contentType))
+            {
+                contentType = "application/octet-stream";
+            }
+            return contentType;
+        }
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.Slider.ToListAsync());
@@ -105,15 +116,29 @@ namespace CmsApplication.Areas.Panel.Controllers
             return File(fileStream, this.GetMimeType(slider.FileName));
         }
 
-        private string GetMimeType(string fileName)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
         {
-            var provider = new FileExtensionContentTypeProvider();
-            string contentType;
-            if (!provider.TryGetContentType(fileName, out contentType))
+            var slider = await _context.Slider.FindAsync(id);
+            if (slider == null)
             {
-                contentType = "application/octet-stream";
+                return NotFound();
             }
-            return contentType;
+
+            var path = Path.Combine(this._webHostEnvironment.WebRootPath, "uploads", slider.FileName);
+
+            _context.Slider.Remove(slider);
+            await _context.SaveChangesAsync();
+
+            FileInfo fileInfo = new FileInfo(path);
+            if (fileInfo.Exists)
+            {
+                fileInfo.Delete();
+            }
+
+            _f.Flash(Types.Success, "İşlem Başarıyla Gerçekleştirildi");
+            return RedirectToAction(nameof(Index));
         }
     }
 }
