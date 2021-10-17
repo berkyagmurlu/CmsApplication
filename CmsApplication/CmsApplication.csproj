@@ -27,4 +27,8 @@
     <None Remove="SmartBreadcrumbs" />
     <None Remove="Data\Components\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\" />
+  </ItemGroup>
 </Project>
