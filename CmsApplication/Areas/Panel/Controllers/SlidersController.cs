@@ -141,5 +141,20 @@ namespace CmsApplication.Areas.Panel.Controllers
             _f.Flash(Types.Success, "İşlem Başarıyla Gerçekleştirildi");
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Sort(int id, [FromBody] int direction)
+        {
+            var slider = await _context.Slider.FindAsync(id);
+            if (slider == null)
+            {
+                return NotFound();
+            }
+
+            slider.Direction = direction;
+            _context.Update(slider);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
     }
 }

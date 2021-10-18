@@ -11,13 +11,14 @@
     </a>
 }
 
-<div class="row">
+<div id="slider-grid" class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
+                <table class="table sort-items table-hover text-nowrap">
                     <thead>
                         <tr>
+                            <th class="w-50px"></th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Title)
                             </th>
@@ -35,7 +36,10 @@
                         {
                             @foreach (var item in Model)
                             {
-                                <tr>
+                                <tr class="sortable-items" data-id="@item.Id">
+                                    <td>
+                                        <i class="fas fa-arrows-alt"></i>
+                                    </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Title)
                                     </td>
@@ -62,7 +66,7 @@
                         else
                         {
                             <tr>
-                                <td colspan="4">Kayıt Bulunamadı.</td>
+                                <td colspan="6">Kayıt Bulunamadı.</td>
                             </tr>
                         }
                     </tbody>
@@ -71,3 +75,21 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        setTimeout(function () {
+            $(function () {
+                let sortableItem = $("#slider-grid table.sort-items tbody");
+
+                sortableItem.sortable({
+                    stop: function (event, ui) {
+                        $(".sortable-items").each(function (index) {
+                            $.post("/Panel/Sliders/Sort/" + $(this).data('key'), { direction: index }, function () { });
+                        });
+                    }
+                }).disableSelection();
+            });
+        }, 500);
+    </script>
+}
