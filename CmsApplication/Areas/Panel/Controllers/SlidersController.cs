@@ -143,7 +143,7 @@ namespace CmsApplication.Areas.Panel.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Sort(int id, [FromBody] int direction)
+        public async Task<IActionResult> Sort(int id, int direction)
         {
             var slider = await _context.Slider.FindAsync(id);
             if (slider == null)
@@ -154,7 +154,7 @@ namespace CmsApplication.Areas.Panel.Controllers
             slider.Direction = direction;
             _context.Update(slider);
             await _context.SaveChangesAsync();
-            return Ok();
+            return Ok(new { status = true });
         }
     }
 }
